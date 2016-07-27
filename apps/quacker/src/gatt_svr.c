@@ -504,6 +504,7 @@ gatt_svr_chr_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
                                                 (void *)quacker_orientation,
                                                 NULL);
                         // TODO fire event
+                        orientation = i; // set global enum
                         return rc;
                     }
                 }

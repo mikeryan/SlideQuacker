@@ -158,19 +158,39 @@ led_number_hex(uint8_t num)
 void
 led_spinner(void)
 {
+    const int led_order[] = { 7, 0, 1, 2, 3, 10, 11, 12 };
+    int state = 0;
+    int next;
+
+    led_static("  "); // clear
+
+    do {
+        next = (state + 1) % (sizeof(led_order) / sizeof(int));
+        hal_gpio_clear(led_order[state]);
+        hal_gpio_set(led_order[next]);
+        os_time_delay(100);
+        state = next;
+    } while (state > 0);
+}
+
+void
+led_spinner_pairing(void)
+{
     int i;
 
-#define DELAY 30
+    led_static("  "); // clear
+
     while (1) {
         for (i = 0; i < 14; ++i) {
             // skip center
             if (i == 6 || i == 13)
                 continue;
             hal_gpio_toggle(i);
-            os_time_delay(DELAY);
+            os_time_delay(30);
         }
     }
 }
+
 
 void
 led_init(void)

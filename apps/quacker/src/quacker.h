@@ -25,6 +25,7 @@
 enum orientation_t {
     NONE = 0, FLAT, UPRIGHT, RUBBER,
 };
+extern enum orientation_t orientation;
 
 extern struct log quacker_log;
 
@@ -71,5 +72,7 @@ int keystore_add(uint16_t ediv, uint64_t rand_num, uint8_t *key,
 void led_init(void);
 void led_scroll(char *message);
 void led_static(char *message);
+void led_spinner(void);
+void led_spinner_pairing(void);
 
 #endif

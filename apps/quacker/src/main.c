@@ -48,6 +48,9 @@
 
 #include "quacker.h"
 
+/** OUR ORIENTATION -- MOST IMPORTANT ASPECT OF THIS WHOLE THING */
+enum orientation_t orientation;
+
 #define BSWAP16(x)  ((uint16_t)(((x) << 8) | (((x) & 0xff00) >> 8)))
 
 /** Mbuf settings. */
@@ -318,6 +321,8 @@ quacker_task_handler(void *unused)
     struct os_callout_func *cf;
     int rc;
 
+    orientation = NONE;
+
     rc = ble_hs_start();
     assert(rc == 0);
 
@@ -377,25 +382,30 @@ button_task_handler(void *unused)
 static void
 led_task_handler(void *unused)
 {
-    struct os_event *ev = NULL;
-
     while (1) {
-        led_scroll("flat");
-        led_scroll("upright");
-        led_scroll("dspill is odious");
-        led_static("FL");
-        os_time_delay(3000);
-        led_static("UP");
-        os_time_delay(3000);
-        led_static("r*");
-        os_time_delay(3000);
-    }
-
-    while (1) {
-        ev = os_eventq_get(&led_evq);
-        os_time_delay(1000);
-        if (ev != NULL)
-            console_printf("ok\n");
+        switch (orientation) {
+        case FLAT:
+            led_scroll("FLAT");
+            led_static("FL");
+            os_time_delay(5000);
+            break;
+        case UPRIGHT:
+            led_scroll("UPRIGHT");
+            led_static("UP");
+            os_time_delay(5000);
+            break;
+        case RUBBER:
+            led_scroll("rubber");
+            led_static("ru");
+            os_time_delay(5000);
+            if ((rand() % 5) == 0)
+                led_scroll("dspill_is_odious");
+            break;
+        case NONE:
+        default:
+            led_spinner();
+            break;
+        }
     }
 }
 
