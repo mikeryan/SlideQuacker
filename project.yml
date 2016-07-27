@@ -1,0 +1,10 @@
+project.name: "slide_quacker"
+
+project.repositories:
+    - mynewt-core-bugfix
+
+repository.mynewt-core-bugfix:
+    type: github
+    vers: 0-latest
+    user: mikeryan
+    repo: incubator-mynewt-core

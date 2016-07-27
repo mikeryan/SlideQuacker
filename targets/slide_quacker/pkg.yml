@@ -1,0 +1,7 @@
+### Package: targets/slide_quacker
+pkg.name: "targets/slide_quacker"
+pkg.type: "target"
+pkg.description: "Slide Quacker Target"
+pkg.author: "Mike Ryan <mike@ice9.us>"
+pkg.homepage: 
+

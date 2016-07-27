@@ -1,0 +1,4 @@
+### Target: targets/slide_quacker
+target.app: "apps/quacker"
+target.bsp: "hw/bsp/wic2.72-duckhunt"
+target.build_profile: "optimized"
