@@ -513,8 +513,8 @@ main(void)
     cfg = ble_hs_cfg_dflt;
     cfg.max_hci_bufs = 3;
     cfg.max_connections = 1;
-    cfg.max_attrs = 42;
-    cfg.max_services = 5;
+    cfg.max_attrs = 50;
+    cfg.max_services = 6;
     cfg.max_client_configs = 10;
     cfg.max_gattc_procs = 2;
     cfg.max_l2cap_chans = 3;

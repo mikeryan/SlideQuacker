@@ -22,6 +22,10 @@
 
 #include "log/log.h"
 
+enum orientation_t {
+    NONE = 0, FLAT, UPRIGHT, RUBBER,
+};
+
 extern struct log quacker_log;
 
 extern const char *quacker_device_name;

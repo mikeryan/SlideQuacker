@@ -20,12 +20,30 @@
  */
 
 #include <assert.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include "bsp/bsp.h"
 #include "console/console.h"
 #include "host/ble_hs.h"
 #include "quacker.h"
+
+/**
+ * Vendor-specific slide quacker service.
+ *
+ * Set your orientation and other fun tasks!
+ */
+/* 0332FF64-7433-499F-8F27-38F7A2638B6F */
+const uint8_t gatt_svr_svc_quacker[16] = {
+    0x6F, 0x8B, 0x63, 0xA2, 0xF7, 0x38, 0x27, 0x8F,
+    0x9F, 0x49, 0x33, 0x74, 0x64, 0xFF, 0x32, 0x03,
+};
+
+/* 1BE106B6-B21E-49C5-B2C4-C639D94C2FE1 */
+const uint8_t gatt_svr_chr_quacker_orientation[16] = {
+    0xE1, 0x2F, 0x4C, 0xD9, 0x39, 0xC6, 0xC4, 0xB2,
+    0xC5, 0x49, 0x1E, 0xB2, 0xB6, 0x06, 0xE1, 0x1B,
+};
 
 static int
 gatt_svr_chr_access_gap(uint16_t conn_handle, uint16_t attr_handle, uint8_t op,
@@ -49,6 +67,10 @@ gatt_svr_dsc_access_hid(uint16_t conn_handle, uint16_t attr_handle,
                                 uint8_t op, union ble_gatt_access_ctxt *ctxt,
                                 void *arg);
 
+static int
+gatt_svr_chr_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
+                                uint8_t op, union ble_gatt_access_ctxt *ctxt,
+                                void *arg);
 
 static const struct ble_gatt_svc_def gatt_svr_svcs[] = {
     {
@@ -167,6 +189,22 @@ static const struct ble_gatt_svc_def gatt_svr_svcs[] = {
             0, /* No more characteristics in this service. */
         } },
     },
+
+    {
+        /*** Service: quacker. */
+        .type = BLE_GATT_SVC_TYPE_PRIMARY,
+        .uuid128 = (void *)gatt_svr_svc_quacker,
+        .characteristics = (struct ble_gatt_chr_def[]) { {
+            /*** Characteristic: Read/Write. */
+            .uuid128 = (void *)gatt_svr_chr_quacker_orientation,
+            .access_cb = gatt_svr_chr_access_quacker,
+            .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
+                     BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_ENC,
+        }, {
+            0, /* No more characteristics in this service. */
+        } },
+    },
+
 
     {
         0, /* No more services. */
@@ -420,6 +458,58 @@ gatt_svr_dsc_access_hid(uint16_t conn_handle, uint16_t attr_handle,
     default:
         assert(0);
         return BLE_ATT_ERR_UNLIKELY;
+    }
+
+    return BLE_ATT_ERR_UNLIKELY;
+}
+
+char quacker_orientation[sizeof("UPRIGHT")] = { 'n', 'o', 'n', 'e', 0 };
+static int
+gatt_svr_chr_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
+                            uint8_t op, union ble_gatt_access_ctxt *ctxt,
+                            void *arg)
+{
+    void *uuid128;
+    int rc, len, i;
+    char scratch[sizeof("UPRIGHT")];
+
+    static const char* orientations[] = {
+        "none", "flat", "upright", "rubber",
+    };
+
+    uuid128 = ctxt->chr_access.chr->uuid128;
+
+    /* Determine which characteristic is being accessed by examining its
+     * 128-bit UUID.
+     */
+
+    if (memcmp(uuid128, gatt_svr_chr_quacker_orientation, 16) == 0) {
+        if (op == BLE_GATT_ACCESS_OP_READ_CHR) {
+            ctxt->chr_access.data = (void *)quacker_orientation;
+            ctxt->chr_access.len = strlen(quacker_orientation);
+            return 0;
+        } else if (op == BLE_GATT_ACCESS_OP_WRITE_CHR) {
+            if ((len = ctxt->chr_access.len) < sizeof(scratch)) {
+                // tolower() the entire write
+                for (i = 0; i < len; ++i)
+                    scratch[i] = tolower(((char *)ctxt->chr_access.data)[i]);
+                scratch[len] = 0;
+                // see if it matches any known orientations
+                for (i = 0; i < sizeof(orientations)/sizeof(char *); ++i) {
+                    if (strcmp(scratch, orientations[i]) == 0) {
+                        // write lowercase version into memory
+                        memcpy(ctxt->chr_access.data, scratch, len);
+                        rc = gatt_svr_chr_write(op, ctxt, 1,
+                                                sizeof quacker_orientation,
+                                                (void *)quacker_orientation,
+                                                NULL);
+                        // TODO fire event
+                        return rc;
+                    }
+                }
+            }
+            return BLE_ATT_ERR_INVALID_ATTR_VALUE_LEN;
+        }
     }
 
     return BLE_ATT_ERR_UNLIKELY;
