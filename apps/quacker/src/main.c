@@ -28,7 +28,11 @@
 #include "hal/hal_gpio.h"
 #include "hal/hal_cputime.h"
 #include "hal/hal_i2c.h"
+#include "hal/hal_flash.h"
+#include "hal/flash_map.h"
 #include "console/console.h"
+#include "fs/fs.h"
+#include "nffs/nffs.h"
 
 /* BLE */
 #include "nimble/ble.h"
@@ -111,6 +115,8 @@ const uint8_t quacker_privacy_flag = 0;
 uint8_t quacker_reconnect_addr[6];
 uint8_t quacker_pref_conn_params[8];
 uint8_t quacker_gatt_service_changed[4];
+
+static int _nffs_init(void);
 
 static int quacker_gap_event(int event, int status,
                              struct ble_gap_conn_ctxt *ctxt, void *arg);
@@ -464,6 +470,9 @@ main(void)
     rc = os_msys_register(&quacker_mbuf_pool);
     assert(rc == 0);
 
+    /* NFFS */
+    _nffs_init();
+
     /* LEDs */
     led_init();
 
@@ -539,4 +548,28 @@ main(void)
     assert(0);
 
     return 0;
+}
+
+static int
+_nffs_init(void)
+{
+    struct nffs_area_desc descs[NFFS_AREA_MAX];
+    int rc;
+    int cnt;
+
+    rc = hal_flash_init();
+    assert(rc == 0);
+
+    rc = nffs_init();
+    assert(rc == 0);
+
+    cnt = NFFS_AREA_MAX;
+    rc = flash_area_to_nffs_desc(FLASH_AREA_NFFS, &cnt, descs);
+    assert(rc == 0);
+    if (nffs_detect(descs) == FS_ECORRUPT) {
+        rc = nffs_format(descs);
+        assert(rc == 0);
+    }
+
+    return rc;
 }

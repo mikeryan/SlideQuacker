@@ -34,11 +34,7 @@
 #include <string.h>
 
 #include <bsp/bsp.h>
-#include <hal/hal_flash.h>
-#include <hal/flash_map.h>
-#include <fs/fs.h>
 #include <fs/fsutil.h>
-#include <nffs/nffs.h>
 
 #include "host/ble_hs.h"
 
@@ -116,8 +112,7 @@ keystore_add(uint16_t ediv, uint64_t rand_num, uint8_t *ltk, int authenticated)
 }
 
 /**
- * Load the keystore from NFFS. Create a new NFFS fs if not detected and a new
- * keystore if needed.
+ * Load the keystore from NFFS. Create a new keystore if needed.
  *
  * @return                      0 on success; fs error on failure
  */
@@ -125,22 +120,6 @@ int
 keystore_init(void)
 {
     int rc;
-    int cnt;
-    struct nffs_area_desc descs[NFFS_AREA_MAX];
-
-    rc = hal_flash_init();
-    assert(rc == 0);
-
-    rc = nffs_init();
-    assert(rc == 0);
-
-    cnt = NFFS_AREA_MAX;
-    rc = flash_area_to_nffs_desc(FLASH_AREA_NFFS, &cnt, descs);
-    assert(rc == 0);
-    if (nffs_detect(descs) == FS_ECORRUPT) {
-        rc = nffs_format(descs);
-        assert(rc == 0);
-    }
 
     // load keystore
     rc = keystore_load();
