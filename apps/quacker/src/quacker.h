@@ -36,6 +36,8 @@ extern uint8_t quacker_reconnect_addr[6];
 extern uint8_t quacker_pref_conn_params[8];
 extern uint8_t quacker_gatt_service_changed[4];
 
+extern char quacker_orientation[sizeof("UPRIGHT")];
+
 /* quacker uses the first "peruser" log module. */
 #define QUACKER_LOG_MODULE  (LOG_MODULE_PERUSER + 0)
 

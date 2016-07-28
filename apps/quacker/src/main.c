@@ -32,6 +32,7 @@
 #include "hal/flash_map.h"
 #include "console/console.h"
 #include "fs/fs.h"
+#include "fs/fsutil.h"
 #include "nffs/nffs.h"
 
 /* BLE */
@@ -50,6 +51,7 @@
 
 /** OUR ORIENTATION -- MOST IMPORTANT ASPECT OF THIS WHOLE THING */
 enum orientation_t orientation;
+#define ORIENTATION_FILE "/orientation.bin"
 
 #define BSWAP16(x)  ((uint16_t)(((x) << 8) | (((x) & 0xff00) >> 8)))
 
@@ -120,6 +122,8 @@ uint8_t quacker_pref_conn_params[8];
 uint8_t quacker_gatt_service_changed[4];
 
 static int _nffs_init(void);
+static int load_orientation(void);
+static int save_orientation(void);
 
 static int quacker_gap_event(int event, int status,
                              struct ble_gap_conn_ctxt *ctxt, void *arg);
@@ -321,8 +325,6 @@ quacker_task_handler(void *unused)
     struct os_callout_func *cf;
     int rc;
 
-    orientation = NONE;
-
     rc = ble_hs_start();
     assert(rc == 0);
 
@@ -382,6 +384,7 @@ button_task_handler(void *unused)
 static void
 led_task_handler(void *unused)
 {
+    enum orientation_t prev_orientation = orientation;
     while (1) {
         switch (orientation) {
         case FLAT:
@@ -405,6 +408,11 @@ led_task_handler(void *unused)
         default:
             led_spinner();
             break;
+        }
+
+        if (orientation != prev_orientation) {
+            save_orientation();
+            prev_orientation = orientation;
         }
     }
 }
@@ -546,6 +554,10 @@ main(void)
     rc = console_init(NULL);
     assert(rc == 0);
 
+    /* orientation */
+    load_orientation();
+
+
     /* Register GATT attributes (services, characteristics, and
      * descriptors).
      */
@@ -581,5 +593,46 @@ _nffs_init(void)
         assert(rc == 0);
     }
 
+    return rc;
+}
+
+static int
+load_orientation(void)
+{
+    int rc;
+    char *str;
+
+    rc = fsutil_read_file(ORIENTATION_FILE, 0, sizeof(orientation), &orientation, NULL);
+    if (rc != 0) {
+        // create a new file if necessary
+        rc = save_orientation();
+    }
+
+    switch (orientation) {
+    case FLAT:
+        str = "flat";
+        break;
+    case UPRIGHT:
+        str = "upright";
+        break;
+    case RUBBER:
+        str = "rubber";
+        break;
+    case NONE:
+    default:
+        str = "none";
+    }
+    strcpy(quacker_orientation, str);
+
+    return rc;
+}
+
+static int
+save_orientation(void)
+{
+    int rc;
+
+    // save keys
+    rc = fsutil_write_file(ORIENTATION_FILE, &orientation, sizeof(orientation));
     return rc;
 }
