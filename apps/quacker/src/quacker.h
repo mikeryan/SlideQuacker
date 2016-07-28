@@ -59,6 +59,7 @@ extern char quacker_orientation[sizeof("UPRIGHT")];
 #define GATT_SVR_CHR_HID_CONTROL_POINT        0x2A4C
 #define GATT_SVR_CHR_PROTOCOL_MODE            0x2A4E
 
+#define GATT_SVR_DSC_DESCRIPTION              0x2901
 #define GATT_SVR_DSC_REPORT_REFERENCE         0x2908
 
 void gatt_svr_init(void);

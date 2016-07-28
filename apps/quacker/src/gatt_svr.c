@@ -72,6 +72,11 @@ gatt_svr_chr_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
                                 uint8_t op, union ble_gatt_access_ctxt *ctxt,
                                 void *arg);
 
+static int
+gatt_svr_dsc_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
+                                uint8_t op, union ble_gatt_access_ctxt *ctxt,
+                                void *arg);
+
 static const struct ble_gatt_svc_def gatt_svr_svcs[] = {
     {
         /*** Service: GAP. */
@@ -200,11 +205,19 @@ static const struct ble_gatt_svc_def gatt_svr_svcs[] = {
             .access_cb = gatt_svr_chr_access_quacker,
             .flags = BLE_GATT_CHR_F_READ | BLE_GATT_CHR_F_READ_ENC |
                      BLE_GATT_CHR_F_WRITE | BLE_GATT_CHR_F_WRITE_ENC,
+            .descriptors = (struct ble_gatt_dsc_def[]) { {
+                .uuid128 = BLE_UUID16(GATT_SVR_DSC_DESCRIPTION),
+                .att_flags = BLE_ATT_F_READ | BLE_ATT_F_READ_ENC,
+                .access_cb = gatt_svr_dsc_access_quacker,
+                .arg = (void *)1,
+            }, {
+                0, /* No more descriptors in this characteristic. */
+            } },
+
         }, {
             0, /* No more characteristics in this service. */
         } },
     },
-
 
     {
         0, /* No more services. */
@@ -511,6 +524,32 @@ gatt_svr_chr_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
             }
             return BLE_ATT_ERR_INVALID_ATTR_VALUE_LEN;
         }
+    }
+
+    return BLE_ATT_ERR_UNLIKELY;
+}
+
+static char gatt_svr_quacker_description[] = "Orientation";
+static int
+gatt_svr_dsc_access_quacker(uint16_t conn_handle, uint16_t attr_handle,
+                            uint8_t op, union ble_gatt_access_ctxt *ctxt,
+                            void *arg)
+{
+    uint16_t uuid16;
+
+    uuid16 = ble_uuid_128_to_16(ctxt->chr_access.chr->uuid128);
+    assert(uuid16 != 0);
+
+    switch (uuid16) {
+    case GATT_SVR_DSC_DESCRIPTION:
+        assert(op == BLE_GATT_ACCESS_OP_READ_DSC);
+        ctxt->chr_access.data = (void *)gatt_svr_quacker_description;
+        ctxt->chr_access.len = strlen(gatt_svr_quacker_description);
+        return 0;
+
+    default:
+        assert(0);
+        return BLE_ATT_ERR_UNLIKELY;
     }
 
     return BLE_ATT_ERR_UNLIKELY;
