@@ -8,6 +8,8 @@ The firmware is an app running on [Apache
 Mynewt](http://mynewt.apache.org), an open source RTOS and BLE stack.
 The app is heavily based on the bleprph example application.
 
+![Slide Quacker](/doc/quacker.jpg?raw=true "Slide Quacker")
+
 # Conference
 
 This is the badge for Wrong Island Con 2.7, taking place on Catalina on
