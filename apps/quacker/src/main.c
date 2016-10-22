@@ -355,7 +355,12 @@ button_task_handler(void *unused)
     static const uint8_t report_char[] = { 0x50, 0x4F }; // left and right
     static const int button[] = { BUTTON1, BUTTON2 };
     int state[] = { 1, 1 };
+    int count[] = { 0, 0 };
     int i;
+
+#define CHECK_MSEC 5
+#define PRESS_MSEC 20
+#define RELEASE_MSEC 100
 
     hal_gpio_init_out(LED_EYE1, 0);
 
@@ -366,18 +371,26 @@ button_task_handler(void *unused)
         for (i = 0; i < 2; ++i) {
             int val = hal_gpio_read(button[i]);
             if (state[i] == 0 && val > 0) {
-                gatt_svr_hid_report[2] = 0x00;
-                ble_gatts_chr_updated(0x21);
-                hal_gpio_clear(LED_EYE1);
-                state[i] = 1;
+                ++count[i];
+                if (count[i] > PRESS_MSEC / CHECK_MSEC) {
+                    gatt_svr_hid_report[2] = 0x00;
+                    ble_gatts_chr_updated(0x21);
+                    hal_gpio_clear(LED_EYE1);
+                    state[i] = 1;
+                    count[i] = 0;
+                }
             } else if (state[i] == 1 && val == 0) {
-                gatt_svr_hid_report[2] = report_char[i];
-                ble_gatts_chr_updated(0x21);
-                hal_gpio_set(LED_EYE1);
-                state[i] = 0;
+                ++count[i];
+                if (count[i] > RELEASE_MSEC / CHECK_MSEC) {
+                    gatt_svr_hid_report[2] = report_char[i];
+                    ble_gatts_chr_updated(0x21);
+                    hal_gpio_set(LED_EYE1);
+                    state[i] = 0;
+                    count[i] = 0;
+                }
             }
         }
-        os_time_delay(OS_TICKS_PER_SEC / 100);
+        os_time_delay(OS_TICKS_PER_SEC / 200);
     }
 }
 
