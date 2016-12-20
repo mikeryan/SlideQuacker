@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: WIC2016.PcbDoc   12/18/2016  3:05:05 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : WIC2016ver01.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        12.99mil (0.32995mm)     Round          16               0.71 Inch (18.00 mm)
+T2        15mil (0.381mm)          Round          4                0.14 Inch (3.60 mm)
+T3        15.75mil (0.40005mm)     Round          69               12.48 Inch (316.87 mm)
+T4        133.86mil (3.40004mm)    Round          1                0.00 Inch (0.00 mm)
+T5        133.86mil (3.40004mm)    Round          2         NPTH   3.13 Inch (79.50 mm)
+---------------------------------------------------------------------------
+Totals                                            92               16.46 Inch (417.97 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00

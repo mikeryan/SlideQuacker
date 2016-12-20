@@ -1,0 +1,71 @@
+Designator Footprint               Mid X         Mid Y         Ref X         Ref Y         Pad X         Pad Y TB      Rotation Comment        
+
+Designator block_2             -13600mil     -13300mil    364.173mil   3681.102mil     -13600mil     -13300mil  T         30.00 Comment        
+D13        LED_0603_GREEN     2321.85mil   2097.441mil    2321.85mil   2097.441mil   2294.291mil   2097.441mil  T        360.00 LED_0603_GREEN_LG_LTST-C190GKT
+SW3        JS202011SCQN       2967.52mil    2256.89mil    2967.52mil    2256.89mil   3065.945mil   2148.622mil  B        180.00 Switch         
+C2         C0603             3575.787mil   2241.142mil   3575.787mil   2241.142mil   3603.347mil   2241.142mil  B        180.00 CAP_CER_0603_0.1UF_100V_10%_X7S
+C1         C0603             3580.709mil   2468.504mil   3580.709mil   2468.504mil   3608.268mil   2468.504mil  B        180.00 CAP_CER_0603_0.1UF_100V_10%_X7S
+U1         10DFN_2002        3605.315mil   2353.347mil   3605.315mil   2353.347mil   3565.945mil   2402.165mil  B        360.00 MMA7660FC      
+D20        6SOT23            2476.378mil   3340.551mil   2476.378mil   3340.551mil   2438.976mil   3387.795mil  B        270.00 TVS_BI_INTERFACE_USB
+X2         XTAL_3215         1003.937mil   1614.173mil   1003.937mil   1614.173mil   1003.937mil   1663.386mil  B        270.00 32.768kHz      
+X1         BT-XTAL_2520      1161.418mil   1401.575mil   1161.417mil   1401.575mil   1133.859mil    1368.11mil  B         90.00 16MHz          
+U3         QFN40P600X600X90-48N   1583.465mil   1573.819mil   1583.465mil   1573.819mil   1496.851mil   1692.912mil  B        270.00 NRF51822-QFAC-R
+C11        CAPC1608X06L      1003.938mil   1716.536mil   1003.937mil   1716.535mil    977.363mil   1716.536mil  B        360.00 12pF           
+C10        CAPC1608X06L      1004.922mil   1508.859mil   1004.921mil   1508.858mil    978.347mil   1508.859mil  B        360.00 12pF           
+C5         CAPC1608X06L      1160.434mil   1493.111mil   1160.433mil    1493.11mil   1133.859mil   1493.111mil  B        360.00 12pF           
+C4         CAPC1608X06L      1063.977mil   1417.322mil   1063.976mil   1417.323mil   1063.977mil   1443.897mil  B        270.00 12pF           
+U4         24QFN4E           2515.748mil   3124.016mil   2515.748mil   3124.016mil   2466.535mil   3200.787mil  B        270.00 CP2104         
+SW2        smd1612           3287.402mil       2500mil   3287.402mil       2500mil   3207.677mil       2500mil  T        360.00 SWITCH_TL1015  
+SW1        smd1612           3287.402mil   2125.984mil   3287.402mil   2125.984mil   3207.677mil   2125.984mil  T        360.00 SWITCH_TL1015  
+R16        R0603             2673.228mil   3183.071mil   2673.228mil   3183.071mil   2673.228mil    3210.63mil  B        270.00 RES_0603_4.7K_OHM_1/10W_1%
+R15        R0603             2537.402mil   2919.291mil   2537.402mil   2919.291mil   2564.961mil   2919.291mil  B        180.00 RES_0603_1.07K_OHM_1/10W_1%
+R14        R0603             2537.401mil   2872.047mil   2537.401mil   2872.047mil   2564.961mil   2872.047mil  B        180.00 RES_0603_1.07K_OHM_1/10W_1%
+R13        RPACK_4_1206      2027.559mil   1456.693mil   2027.559mil   1456.693mil   2055.118mil   1506.693mil  B        270.00 RES_ARRAY_24_OHM_4_RES_1206_ACASA1003E1003P100_1
+R12        RPACK_4_1206      2027.559mil   1614.173mil   2027.559mil   1614.173mil   2055.118mil   1664.173mil  B        270.00 RES_ARRAY_24_OHM_4_RES_1206_ACASA1003E1003P100_1
+R11        RPACK_4_1206      1633.858mil   1870.079mil   1633.858mil   1870.079mil   1583.858mil   1897.638mil  B        360.00 RES_ARRAY_24_OHM_4_RES_1206_ACASA1003E1003P100_1
+R10        RPACK_4_1206      1476.378mil   1870.079mil   1476.378mil   1870.079mil   1426.378mil   1897.638mil  B        360.00 RES_ARRAY_24_OHM_4_RES_1206_ACASA1003E1003P100_1
+R9         R0603             3267.716mil    2303.15mil   3267.716mil    2303.15mil   3240.157mil    2303.15mil  B        360.00 RES_0603_2.2K_OHM_1/10W_1%
+R8         R0603             3267.716mil   2362.205mil   3267.716mil   2362.205mil   3240.157mil   2362.205mil  B        360.00 RES_0603_2.2K_OHM_1/10W_1%
+R7         R0603             1377.953mil   2102.362mil   1377.953mil   2102.362mil   1350.394mil   2102.362mil  B        360.00 RES_0603_2.2K_OHM_1/10W_1%
+R6         R0603             1377.953mil   2043.307mil   1377.953mil   2043.307mil   1350.394mil   2043.307mil  B        360.00 RES_0603_2.2K_OHM_1/10W_1%
+R5         R0603             1377.953mil   1988.189mil   1377.953mil   1988.189mil   1350.394mil   1988.189mil  B        360.00 RES_0603_2.2K_OHM_1/10W_1%
+R4         R0603             1154.528mil   1586.614mil   1154.528mil   1586.614mil   1154.528mil   1614.173mil  B        270.00 RES_0603_2.2K_OHM_1/10W_1%
+R3         R0603             1205.709mil   1586.614mil   1205.709mil   1586.614mil   1205.709mil   1614.173mil  B        270.00 RES_0603_2.2K_OHM_1/10W_1%
+R2         R0603             2279.528mil   2848.425mil   2279.528mil   2848.425mil   2307.087mil   2848.425mil  B        180.00 RES_0603_2.2K_OHM_1/10W_1%
+R1         R0603             2279.528mil   2927.165mil   2279.528mil   2927.165mil   2307.087mil   2927.165mil  B        180.00 RES_0603_2.2K_OHM_1/10W_1%
+L2         R0603             1632.874mil   1214.567mil   1632.874mil   1214.567mil   1605.315mil   1214.567mil  B        360.00 FB_HZ0603A222R-10
+L1         R0603             1556.693mil   1164.173mil   1556.693mil   1164.173mil   1556.693mil   1136.614mil  B         90.00 FB_HZ0603A222R-10
+J1         FCI_RECT_10PIN_50MIL_HEADER_SHROUDED_20021521-00010T1LF   1075.787mil   1892.716mil   1075.787mil   1892.716mil    975.787mil   1969.488mil  B        360.00 JTAG           
+J3         CONN_USB_TE_1981568-1   2535.433mil   3524.114mil   2535.433mil   3576.771mil   2484.252mil   3471.456mil  B        360.00 CONN_USB_TE_1981568-1
+D17        SOD123            2557.087mil   2649.606mil   2557.087mil   2649.606mil   2557.087mil   2722.441mil  B        270.00 SCHOTTKY_BAT42W
+D19        LED_0603_GREEN    2447.835mil   2919.291mil   2447.835mil   2919.291mil   2475.394mil   2919.291mil  B        180.00 LED_0603_GREEN_LG_LTST-C190GKT
+D18        LED_0603_GREEN    2447.835mil   2872.047mil   2447.835mil   2872.047mil   2475.394mil   2872.047mil  B        180.00 LED_0603_GREEN_LG_LTST-C190GKT
+D16        LED_0603_GREEN     2321.85mil   2333.661mil    2321.85mil   2333.661mil   2294.291mil   2333.661mil  T        360.00 LED_0603_GREEN_LG_LTST-C190GKT
+D15        LED_0603_GREEN    2439.961mil   2451.772mil   2439.961mil   2451.772mil   2439.961mil   2479.331mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D14        LED_0603_GREEN    2439.961mil   2215.551mil   2439.961mil   2215.551mil   2439.961mil    2243.11mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D12        LED_0603_GREEN     2203.74mil   2215.551mil    2203.74mil   2215.551mil    2203.74mil    2243.11mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D11        LED_0603_GREEN     2203.74mil   2451.772mil    2203.74mil   2451.772mil    2203.74mil   2479.331mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D10        LED_0603_GREEN     2321.85mil   2569.882mil    2321.85mil   2569.882mil   2294.291mil   2569.882mil  T        360.00 LED_0603_GREEN_LG_LTST-C190GKT
+D9         LED_0603_GREEN     1888.78mil   2333.661mil    1888.78mil   2333.661mil    1861.22mil   2333.661mil  T        360.00 LED_0603_GREEN_LG_LTST-C190GKT
+D8         LED_0603_GREEN     2006.89mil   2451.772mil    2006.89mil   2451.772mil    2006.89mil   2479.331mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D7         LED_0603_GREEN     2006.89mil   2215.551mil    2006.89mil   2215.551mil    2006.89mil    2243.11mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D6         LED_0603_GREEN     1888.78mil   2097.441mil    1888.78mil   2097.441mil    1861.22mil   2097.441mil  T          0.00 LED_0603_GREEN_LG_LTST-C190GKT
+D5         LED_0603_GREEN    1770.669mil   2215.551mil   1770.669mil   2215.551mil   1770.669mil    2243.11mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D4         LED_0603_GREEN    1770.669mil   2451.772mil   1770.669mil   2451.772mil   1770.669mil   2479.331mil  T        270.00 LED_0603_GREEN_LG_LTST-C190GKT
+D3         LED_0603_GREEN     1888.78mil   2569.882mil    1888.78mil   2569.882mil    1861.22mil   2569.882mil  T          0.00 LED_0603_GREEN_LG_LTST-C190GKT
+D2         LED_0603_BLUE     3799.213mil   2598.425mil   3799.213mil   2598.425mil   3799.213mil   2625.984mil  T        270.00 LED_0603_BLUE_LB Q39G-L2N2-35-1
+D1         LED_0603_BLUE     3740.157mil   2598.425mil   3740.157mil   2598.425mil   3740.157mil   2625.984mil  T        270.00 LED_0603_BLUE_LB Q39G-L2N2-35-1
+C17        C0603             2594.488mil   3340.551mil   2594.488mil   3340.551mil   2594.488mil   3312.992mil  B         90.00 CAP_CER_0603_2.2UF_10V_10%_X7S
+C16        c0603             2468.504mil   3001.968mil   2468.504mil   3001.968mil   2496.063mil   3001.968mil  B        180.00 CAP_CER_0603_4.7UF_6.3V_10%_X5R
+C15        c0603             2673.228mil   3072.834mil   2673.228mil   3072.834mil   2673.228mil   3045.275mil  B         90.00 CAP_CER_0603_4.7UF_6.3V_10%_X5R
+C14        C0603             1676.181mil   1362.205mil   1676.181mil   1362.205mil   1676.181mil   1389.764mil  B        270.00 CAP_CER_0603_2200PF_50V_5%_NP0
+C13        C0603             1735.236mil   1362.205mil   1735.236mil   1362.205mil   1735.236mil   1389.764mil  B        270.00 CAP_CER_0603_0.047UF_50V_10%_X7R
+C12        C0603             1556.693mil   1264.173mil   1556.693mil   1264.173mil   1556.693mil   1291.732mil  B        270.00 CAP_CER_0603_1.5PF_100V_C0G
+C9         C0603             1404.527mil   1423.228mil   1404.527mil   1423.228mil   1404.527mil   1450.787mil  B        270.00 CAP_CER_0603_2.2UF_6.3V_10%_X7R
+C8         C0603             1751.968mil   1732.284mil   1751.968mil   1732.284mil   1751.968mil   1759.843mil  B        270.00 CAP_CER_0603_2.2UF_6.3V_10%_X7R
+C7         C0603             1791.339mil   1437.008mil   1791.339mil   1437.008mil   1791.339mil   1464.567mil  B        270.00 CAP_CER_0603_0.1UF_50V_10%_X7R
+C6         C0603             1317.913mil    1532.48mil   1317.913mil    1532.48mil   1345.473mil    1532.48mil  B        180.00 CAP_CER_0603_0.1UF_50V_10%_X7R
+B1         BATTERY_HOLDER_CR2032   2112.095mil   2187.739mil   2112.095mil   2187.739mil   2688.866mil   2187.739mil  B        270.00 BATTERY_SOCKET_CR2032
+ANT1       2450AT18A100      1557.087mil   1025.591mil   1557.087mil   1025.591mil   1557.087mil    1092.52mil  B        270.00 2.4GHz antenna 
+BAL1       2450BM14E0003T    1573.819mil   1379.921mil   1573.819mil   1379.921mil   1558.071mil   1360.236mil  B        360.00 BAL-2450BM14E0003T
+
